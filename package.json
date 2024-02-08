@@ -1,0 +1,45 @@
+{
+  "scripts": {
+    "nodemon": "npx ts-node devBuild.ts && node ./dist/index.js",
+    "dev": "nodemon",
+    "start": "node ./dist/index.js",
+    "update:packages": "ncu -u && yarn",
+    "build": "npx ts-node build.ts",
+    "devBuild": "npx ts-node devBuild.ts",
+    "db:dev": "npx prisma migrate dev",
+    "db:deploy": "npx prisma deploy",
+    "db:deploy:production": "dotenv -e .env.build npx prisma migrate dev",
+    "db:generate:production": "dotenv -e .env.build npx prisma generate",
+    "db:seed": "npx prisma db seed",
+    "db:studio": "npx prisma studio",
+    "db:studio:p": "dotenv -e .env.build npx prisma studio",
+    "db:reset": "npx prisma migrate reset --force"
+  },
+  "dependencies": {
+    "@hono/node-server": "1.5.0",
+    "@prisma/client": "5.8.1",
+    "@skeet-framework/firestore": "2.4.2",
+    "@skeet-framework/utils": "1.2.4",
+    "@solana/web3.js": "1.89.1",
+    "@stdlib/string-percent-encode": "0.1.1",
+    "firebase-admin": "12.0.0",
+    "hono": "3.12.7",
+    "prisma": "5.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.11.6",
+    "dotenv": "16.4.1",
+    "esbuild": "0.19.12",
+    "eslint": "8.56.0",
+    "eslint-config-prettier": "9.1.0",
+    "nodemon": "3.0.3",
+    "npm-check-updates": "16.14.12",
+    "prettier": "3.2.4",
+    "prettier-plugin-prisma": "5.0.0",
+    "ts-loader": "9.5.1",
+    "ts-node": "10.9.2",
+    "tsconfig-paths": "4.2.0",
+    "tsx": "4.7.0",
+    "typescript": "5.3.3"
+  }
+}
