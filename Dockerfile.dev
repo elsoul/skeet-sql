@@ -1,24 +1,30 @@
-FROM node:20.10-alpine AS build
+FROM node:20.11-alpine AS base
+
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
 
 WORKDIR /app
 
-COPY package* yarn.lock ./
-COPY prisma ./prisma/
-COPY tsconfig.json ./
+COPY package.json ./
+
+FROM base AS prod-deps
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
+
+FROM base AS build
 COPY . .
-RUN yarn install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
+RUN pnpm devBuild
+
+COPY prisma /app/prisma/
 RUN npx prisma generate
-RUN yarn devBuild
 
-FROM node:20.10-alpine
-
-WORKDIR /app
-
-RUN apk add openssl
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile --production && yarn cache clean
-COPY --from=build /app/node_modules/.prisma /app/node_modules/.prisma
+FROM base AS production
+COPY --from=prod-deps /app/node_modules /app/node_modules
 COPY --from=build /app/prisma /app/prisma
 COPY --from=build /app/dist /app/dist
+
 RUN npx prisma generate
-CMD ["yarn", "start"]
+EXPOSE 8000
+CMD ["pnpm", "start"]
+
