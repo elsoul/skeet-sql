@@ -10,6 +10,6 @@ void (async () => {
       'process.env.NODE_ENV': `"production"`,
     },
     format: 'cjs',
-    external: ['graphql', '@prisma/client'],
+    external: ['@prisma/client'],
   })
 })()
