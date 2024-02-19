@@ -5,6 +5,8 @@ import { userRouter } from '@/routes/user'
 import { dotenv } from '@skeet-framework/utils'
 dotenv.config()
 
+export const PORT = Number(process.env.PORT) || 3001
+
 const app = new Hono()
 
 // Allowed Origins
@@ -35,7 +37,7 @@ app.use(
 
 // This rootDir name is used to Load Balancer and Reverse Proxy
 // Please do not change this name
-const rootDir = '/sql-user-db'
+export const rootDir = '/sql-user-db'
 
 app.route(rootDir + '/users', userRouter)
 
@@ -47,10 +49,11 @@ app.get(`${rootDir}/root`, async (c) => {
   return c.json({ message: 'Hello, World!' })
 })
 
-const port = Number(process.env.PORT) || 3001
-console.log(`Server is running on port http://localhost:${port}${rootDir}`)
+console.log(`Server is running on port http://localhost:${PORT}${rootDir}`)
 
 serve({
   fetch: app.fetch,
-  port,
+  port: PORT,
 })
+
+export default app
