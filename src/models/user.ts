@@ -48,7 +48,7 @@ export const getAllUsers = async () => {
   }
 }
 
-export const queryUsers = async (query: any) => {
+export const queryUsers = async (query: Prisma.UserFindManyArgs) => {
   try {
     return await prisma.user.findMany(query)
   } catch (error) {
