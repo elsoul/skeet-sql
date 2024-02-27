@@ -1,4 +1,3 @@
-// src/models/user.ts
 import { handlePrismaError } from '@/lib/handlePrismaError'
 import { Prisma, PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
@@ -19,7 +18,10 @@ export const getUserById = async (id: number) => {
   }
 }
 
-export const updateUser = async (id: number, userData: any) => {
+export const updateUser = async (
+  id: number,
+  userData: Partial<Prisma.UserCreateInput>,
+) => {
   try {
     return await prisma.user.update({
       where: { id },
@@ -30,9 +32,25 @@ export const updateUser = async (id: number, userData: any) => {
   }
 }
 
+export const deleteUser = async (id: number) => {
+  try {
+    return await prisma.user.delete({ where: { id } })
+  } catch (error) {
+    return handlePrismaError(error)
+  }
+}
+
 export const getAllUsers = async () => {
   try {
     return await prisma.user.findMany()
+  } catch (error) {
+    return handlePrismaError(error)
+  }
+}
+
+export const queryUsers = async (query: any) => {
+  try {
+    return await prisma.user.findMany(query)
   } catch (error) {
     return handlePrismaError(error)
   }
