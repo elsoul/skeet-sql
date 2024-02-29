@@ -1,6 +1,7 @@
 {
   "name": "skeet-sql",
   "version": "1.0.0",
+  "type": "module",
   "engines": {
     "pnpm": ">=8",
     "npm": "please_use_pnpm_instead",
@@ -9,11 +10,11 @@
   },
   "scripts": {
     "test": "pnpm build && vitest",
-    "nodemon": "npx ts-node devBuild.ts && node ./dist/index.js",
+    "nodemon": "tsx devBuild.ts && node ./dist/index.js",
     "dev": "nodemon",
     "start": "node ./dist/index.js",
-    "build": "npx ts-node build.ts",
-    "devBuild": "npx ts-node devBuild.ts",
+    "build": "tsx build.ts",
+    "devBuild": "tsx devBuild.ts",
     "db:dev": "npx prisma migrate dev",
     "db:deploy": "npx prisma deploy",
     "db:deploy:production": "dotenv -e .env.build npx prisma migrate dev",
@@ -26,14 +27,11 @@
   "dependencies": {
     "@hono/node-server": "1.8.2",
     "@prisma/client": "5.10.2",
-    "@skeet-framework/firestore": "2.5.0",
-    "@skeet-framework/utils": "1.3.3",
-    "hono": "4.0.7",
+    "hono": "4.0.8",
     "prisma": "5.10.2"
   },
   "devDependencies": {
-    "@types/node": "20.11.20",
-    "dotenv": "16.4.5",
+    "@types/node": "20.11.24",
     "esbuild": "0.20.1",
     "esbuild-plugin-alias-path": "^2.0.2",
     "eslint": "8.57.0",
@@ -41,8 +39,6 @@
     "nodemon": "3.1.0",
     "prettier": "3.2.5",
     "prettier-plugin-prisma": "5.0.0",
-    "ts-loader": "9.5.1",
-    "ts-node": "10.9.2",
     "tsconfig-paths": "4.2.0",
     "tsx": "4.7.1",
     "typescript": "5.3.3",

@@ -2,11 +2,9 @@ import { serve } from '@hono/node-server'
 import { Hono, Context } from 'hono'
 import { cors } from 'hono/cors'
 import { userRouter } from '@/routes/user'
-import { dotenv } from '@skeet-framework/utils'
-dotenv.config()
+import 'dotenv/config'
 
 export const PORT = Number(process.env.PORT) || 3001
-
 const app = new Hono()
 
 // Allowed Origins
