@@ -9,7 +9,14 @@ void (async () => {
     define: {
       'process.env.NODE_ENV': `"production"`,
     },
-    format: 'cjs',
-    external: ['@prisma/client'],
+    format: 'esm',
+    external: [
+      'dotenv',
+      '@prisma/client',
+      'path',
+      'fs',
+      'child_process',
+      'util',
+    ],
   })
 })()

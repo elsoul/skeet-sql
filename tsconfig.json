@@ -1,42 +1,27 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "NodeNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "outDir": "./dist",
-    "rootDir": ".",
-    "strict": true,
-    "moduleResolution": "NodeNext",
     "baseUrl": ".",
+    "strict": true,
     "esModuleInterop": true,
+    "declaration": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "resolveJsonModule": true,
-    "lib": ["DOM", "ESNext"],
-    "inlineSources": true,
-    "inlineSourceMap": false,
-    "declaration": false,
-    "noEmitOnError": true,
-    "typeRoots": ["./node_modules/@types"],
+    "lib": ["esnext"],
     "sourceMap": true,
     "paths": {
       "@/*": ["src/*"]
     }
   },
-  "ts-node": {
-    "compilerOptions": {
-      "module": "NodeNext"
-    }
-  },
-  "include": [
-    "src/**/*",
-    "prisma/**/*",
-    "tests/**/*",
-    "build.ts",
-    "devBuild.ts"
-  ],
-  "exclude": ["node_modules"],
-  "compileOnSave": true
+  "files": ["package.json"],
+  "include": ["src/**/*", "tests/**/*", "./**/*"],
+  "exclude": ["dist", "node_modules", "build.ts"],
+  "compileOnSave": false
 }
